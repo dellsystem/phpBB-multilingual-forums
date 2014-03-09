@@ -167,9 +167,7 @@
 		</open>
 		<open src="includes/functions.php">
 			<edit>
-				<find><![CDATA[	return;
-}
-
+				<find><![CDATA[
 ?>]]></find>
 				<action type="before-add"><![CDATA[/**
 * Multilingual Forums MOD
