@@ -8,9 +8,7 @@ downloads][image]][page]
 
 * [Features, screenshots, download links and more][page]
 * [Demo board][demo] (read the posts in the only forum before posting)
-* board
-* [MOD development topic at phpBB.com][topic] (please post support queries
-* here)
+* [MOD development topic at phpBB.com][topic] (please post support queries here)
 
 Contributing and requesting features
 -----------------------------------
