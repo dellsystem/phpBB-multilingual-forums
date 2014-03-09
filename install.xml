@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Multilingual Forums MOD]]></title>
+		<description lang="en"><![CDATA[Enables multi-language support for forum names.]]></description>
+		<author-notes lang="en"><![CDATA[Kind of hacky. Sorry. If you really need this MOD, though, you probably don't care.]]></author-notes>
+		<github><![CDATA[https://github.com/dellsystem/phpBB-multilingual-forums]]></github>
+		<author-group>
+			<author>
+				<realname><![CDATA[Wendy Liu]]></realname>
+				<username><![CDATA[dellsystem]]></username>
+				<homepage><![CDATA[http://www.dellsystem.me/phpbb]]></homepage>
+				<email><![CDATA[dellsystem@phpbb.com]]></email>
+			</author>
+		</author-group>
+		<mod-version>0.0.1</mod-version>
+		<installation>
+			<level>intermediate</level>
+			<time>600</time>
+			<target-version>3.0.12</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2014-03-09</date>
+				<rev-version>0.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First version released]]></change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/adm/style/acp_multiling.html" to="adm/style/acp_multiling.html"/>
+			<file from="root/includes/acp/acp_multiling.php" to="includes/acp/acp_multiling.php"/>
+			<file from="root/includes/acp/info/acp_multiling.php" to="includes/acp/info/acp_multiling.php"/>
+			<file from="root/multiling_mod_install.php" to="multiling_mod_install.php"/>
+			<file from="root/language/en/mods/info_acp_multiling.php" to="language/en/mods/info_acp_multiling.php"/>
+			<file from="root/language/en/mods/multiling/acp.php" to="language/en/mods/multiling/acp.php"/>
+		</copy>
+		<open src="memberlist.php">
+			<edit>
+				<find><![CDATA[$forums[$row['forum_id']] = $row['forum_name'];]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="posting.php">
+			<edit>
+				<find><![CDATA['FORUM_NAME'			=> $post_data['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$post_data['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($post_data['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="search.php">
+			<edit>
+				<find><![CDATA['forum_name'		=> $rowset[$orig_topic_id]['forum_name'])]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$rowset[$orig_topic_id]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($rowset[$orig_topic_id]['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_TITLE'		=> $row['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[if ($row['right_id'] - $row['left_id'] > 1)]]></find>
+				<action type="before-add"><![CDATA[	$forum_name = get_text_for_language($row['forum_name'], $user->data['user_lang']);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$holding .= '<option value="' . $row['forum_id'] . '"' . $selected . '>' . $padding . $row['forum_name'] . '</option>';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$s_forums .= $holding . '<option value="' . $row['forum_id'] . '"' . $selected . '>' . $padding . $row['forum_name'] . '</option>';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="viewforum.php">
+			<edit>
+				<find><![CDATA[// Dump out the page header and load viewforum template]]></find>
+				<action type="before-add"><![CDATA[$forum_name = get_text_for_language($forum_data['forum_name'], $user->data['user_lang']);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[page_header($user->lang['VIEW_FORUM'] . ' - ' . $forum_data['forum_name'], true, $forum_id);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data['forum_name']]]></inline-find>
+				</inline-edit>
+				<action type="replace-with"><![CDATA[$forum_name]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[watch_topic_forum('forum', $s_watching_forum, $user->data['user_id'], $forum_id, 0, $notify_status, $start, $forum_data['forum_name']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="viewonline.php">
+			<edit>
+				<find><![CDATA[$forum_id = $row['session_forum_id'];]]></find>
+				<action type="after-add"><![CDATA[			$forum_name = get_text_for_language($forum_data[$forum_id]['forum_name'], $user->data['user_lang']);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$location = sprintf($user->lang['READING_LINK'], $forum_data[$forum_id]['forum_name']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data[$forum_id]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$location = sprintf($user->lang['REPLYING_MESSAGE'], $forum_data[$forum_id]['forum_name']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data[$forum_id]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$location = sprintf($user->lang['POSTING_MESSAGE'], $forum_data[$forum_id]['forum_name']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data[$forum_id]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$location = sprintf($user->lang['READING_TOPIC'], $forum_data[$forum_id]['forum_name']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data[$forum_id]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$location = sprintf($user->lang['READING_FORUM'], $forum_data[$forum_id]['forum_name']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data[$forum_id]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[$forum_name]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA['FORUM_NAME' 	=> $topic_data['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$topic_data['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($topic_data['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[?>]]></find>
+				<action type="before-add"><![CDATA[/**
+* Multilingual Forums MOD
+*/
+function get_text_for_language($input, $lang)
+{
+	global $config;
+
+	$delimiter = $config['multiling_delimiter'];
+	$forum_names = explode($delimiter, $input);
+	$languages = explode($delimiter, $config['multiling_languages']);
+
+	if (count($forum_names) == count($languages))
+	{
+		// Get the index of the user's language in the languages array
+		$i = array_search($lang, $languages);
+		return $forum_names[$i];
+	}
+	else
+	{
+		// This forum name doesn't support multiple languages. Return as-is.
+		return $input;
+	}
+}
+]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_admin.php">
+			<edit>
+				<find><![CDATA[$forum_list .= '<option value="' . $row['forum_id'] . '"' . (($disabled) ? ' disabled="disabled" class="disabled-option"' : $selected) . '>' . $padding . $row['forum_name'] . '</option>';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/functions_content.php">
+			<edit>
+				<find><![CDATA['FORUM_NAME'	=> $row['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/functions_display.php">
+			<edit>
+				<find><![CDATA[$subforums[$parent_id][$forum_id]['name'] = $row['forum_name'];]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_display($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'			=> $row['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'			=> $row['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'	=> $parent_name,]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$parent_name]]></inline-find>
+					<inline-action type="before-add"><![CDATA[get_text_for_language($parent_name, $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'	=> $forum_data['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($forum_data['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'	=> $forum_data['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($forum_data['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$active_f_name = $active_f_row['forum_name'];]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$active_f_row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($active_f_row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/functions_posting.php">
+			<edit>
+				<find><![CDATA[$topic_notification = ($mode == 'reply' || $mode == 'quote') ? true : false;]]></find>
+				<action type="before-add"><![CDATA[	$forum_name = get_text_for_language($forum_name, $user->data['user_lang']);]]></action>
+			</edit>
+		</open>
+		<open src="includes/mcp/mcp_forum.php">
+			<edit>
+				<find><![CDATA['FORUM_NAME'			=> $forum_info['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_info['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($forum_info['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/mcp/mcp_front.php">
+			<edit>
+				<find><![CDATA[$forum_names[$row['forum_id']] = $row['forum_name'];]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'	=> (!$global_topic) ? $row['forum_name'] : $user->lang['GLOBAL_ANNOUNCEMENT'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/mcp/mcp_queue.php">
+			<edit>
+				<find><![CDATA[$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . $row['forum_name'] . '</option>';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$forum_names[$row['forum_id']] = $row['forum_name'];]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/mcp/mcp_reports.php">
+			<edit>
+				<find><![CDATA[$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . $row['forum_name'] . '</option>';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_NAME'	=> (!$global_topic) ? $forum_data[$row['forum_id']]['forum_name'] : $user->lang['GLOBAL_ANNOUNCEMENT'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_data[$row['forum_id']]['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($forum_data[$row['forum_id']]['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/ucp/ucp_main.php">
+			<edit>
+				<find><![CDATA['FORUM_NAME'			=> $row['forum_name'],]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<php-installer><![CDATA[multiling_mod_install.php]]></php-installer>
+		<diy-instructions lang="en"><![CDATA[You can configure this MOD in the ACP, under the .MODs tab. You will then have to edit your forum names to take advantage of the multilingual support provided by this mod.
+
+As an example, if your board has two languages, English (UK) and French, installed, and you don't plan on using the character | in any of your forum names, you could set the delimiter (configurable in the ACP, under the .MODS tab) to be |, and set the languages to be en-gb|fr. Then, change all your forum names to use the format Hello|Bonjour.]]></diy-instructions>
+	</action-group>
+</mod>
