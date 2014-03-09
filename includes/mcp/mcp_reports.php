@@ -322,7 +322,7 @@ class mcp_reports
 				$forum_options = '<option value="0"' . (($forum_id == 0) ? ' selected="selected"' : '') . '>' . $user->lang['ALL_FORUMS'] . '</option>';
 				foreach ($forum_list_reports as $row)
 				{
-					$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . $row['forum_name'] . '</option>';
+					$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . get_text_for_language($row['forum_name'], $user->data['user_lang']) . '</option>';
 					$forum_data[$row['forum_id']] = $row;
 				}
 				unset($forum_list_reports);
@@ -404,7 +404,7 @@ class mcp_reports
 							'REPORTER'				=> get_username_string('username', $row['reporter_id'], $row['reporter_name'], $row['reporter_colour']),
 							'U_REPORTER'			=> get_username_string('profile', $row['reporter_id'], $row['reporter_name'], $row['reporter_colour']),
 
-							'FORUM_NAME'	=> (!$global_topic) ? $forum_data[$row['forum_id']]['forum_name'] : $user->lang['GLOBAL_ANNOUNCEMENT'],
+							'FORUM_NAME'	=> (!$global_topic) ? get_text_for_language($forum_data[$row['forum_id']]['forum_name'], $user->data['user_lang']) : $user->lang['GLOBAL_ANNOUNCEMENT'],
 							'POST_ID'		=> $row['post_id'],
 							'POST_SUBJECT'	=> ($row['post_subject']) ? $row['post_subject'] : $user->lang['NO_SUBJECT'],
 							'POST_TIME'		=> $user->format_date($row['post_time']),

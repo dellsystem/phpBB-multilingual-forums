@@ -141,8 +141,9 @@ else
 	}
 }
 
+$forum_name = get_text_for_language($forum_data['forum_name'], $user->data['user_lang']);
 // Dump out the page header and load viewforum template
-page_header($user->lang['VIEW_FORUM'] . ' - ' . $forum_data['forum_name'], true, $forum_id);
+page_header($user->lang['VIEW_FORUM'] . ' - ' . $forum_name, true, $forum_id);
 
 $template->set_filenames(array(
 	'body' => 'viewforum_body.html')
@@ -208,7 +209,7 @@ $s_watching_forum = array(
 if (($config['email_enable'] || $config['jab_enable']) && $config['allow_forum_notify'] && $forum_data['forum_type'] == FORUM_POST && ($auth->acl_get('f_subscribe', $forum_id) || $user->data['user_id'] == ANONYMOUS))
 {
 	$notify_status = (isset($forum_data['notify_status'])) ? $forum_data['notify_status'] : NULL;
-	watch_topic_forum('forum', $s_watching_forum, $user->data['user_id'], $forum_id, 0, $notify_status, $start, $forum_data['forum_name']);
+	watch_topic_forum('forum', $s_watching_forum, $user->data['user_id'], $forum_id, 0, $notify_status, $start, $forum_name);
 }
 
 $s_forum_rules = '';

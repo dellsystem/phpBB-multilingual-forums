@@ -297,7 +297,7 @@ class mcp_queue
 				$forum_options = '<option value="0"' . (($forum_id == 0) ? ' selected="selected"' : '') . '>' . $user->lang['ALL_FORUMS'] . '</option>';
 				foreach ($forum_list_approve as $row)
 				{
-					$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . $row['forum_name'] . '</option>';
+					$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . get_text_for_language($row['forum_name'], $user->data['user_lang']) . '</option>';
 				}
 
 				$sort_days = $total = 0;
@@ -398,7 +398,7 @@ class mcp_queue
 					$forum_names = array();
 					while ($row = $db->sql_fetchrow($result))
 					{
-						$forum_names[$row['forum_id']] = $row['forum_name'];
+						$forum_names[$row['forum_id']] = get_text_for_language($row['forum_name'], $user->data['user_lang']);
 					}
 					$db->sql_freeresult($result);
 				}

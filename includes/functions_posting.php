@@ -1173,6 +1173,7 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 {
 	global $db, $user, $config, $phpbb_root_path, $phpEx, $auth;
 
+    $forum_name = get_text_for_language($forum_name, $user->data['user_lang']);
 	$topic_notification = ($mode == 'reply' || $mode == 'quote') ? true : false;
 	$forum_notification = ($mode == 'post') ? true : false;
 

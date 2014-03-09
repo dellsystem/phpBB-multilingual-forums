@@ -1,0 +1,37 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_ACP_MULTILING_MOD}</h1>
+
+<!-- IF S_ERROR -->
+    <div class="errorbox">
+        <h3>{L_WARNING}</h3>
+        <p>{ERROR_MSG}</p>
+    </div>
+<!-- ENDIF -->
+
+<form id="acp_board" method="post" action="{U_ACTI0N}">
+    <fieldset>
+        <legend>{L_SETTINGS}</legend>
+        <dl>
+            <dt><label for="multiling_delimiter">{L_MULTILING_DELIMITER}:</label><br /><span>{L_MULTILING_DELIMITER_EXPLAIN}</span></dt>
+            <dd><input id="multiling_delimiter" type="text" name="multiling_delimiter" maxlength="255" size="40" value="{MULTILING_DELIMITER}" /></dd>
+        </dl>
+        <dl>
+            <dt><label for="multiling_languages">{L_MULTILING_LANGUAGES}:</label><br /><span>{L_MULTILING_LANGUAGES_EXPLAIN}</span></dt>
+            <dd><input id="multiling_languages" type="text" name="multiling_languages" maxlength="255" size="40" value="{MULTILING_LANGUAGES}" /></dd>
+        </dl>
+    </fieldset>
+
+    <fieldset>
+        <legend>{L_ACP_SUBMIT_CHANGES}</legend>
+        <p class="submit-buttons">
+            <input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+            <input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+        </p>
+        {S_FORM_TOKEN}
+    </fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

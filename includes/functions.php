@@ -4940,4 +4940,28 @@ function phpbb_user_session_handler()
 	return;
 }
 
+/**
+* Multilingual Forums MOD
+*/
+function get_text_for_language($input, $lang)
+{
+    global $config;
+
+    $delimiter = $config['multiling_delimiter'];
+    $forum_names = explode($delimiter, $input);
+    $languages = explode($delimiter, $config['multiling_languages']);
+
+    if (count($forum_names) == count($languages))
+    {
+        // Get the index of the user's language in the languages array
+        $i = array_search($lang, $languages);
+        return $forum_names[$i];
+    }
+    else
+    {
+        // This forum name doesn't support multiple languages. Return as-is.
+        return $input;
+    }
+}
+
 ?>

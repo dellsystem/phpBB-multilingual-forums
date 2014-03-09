@@ -732,7 +732,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 					$row = array_merge($row, array(
 						'topic_moved_id'	=> $rowset[$orig_topic_id]['topic_moved_id'],
 						'topic_status'		=> $rowset[$orig_topic_id]['topic_status'],
-						'forum_name'		=> $rowset[$orig_topic_id]['forum_name'])
+						'forum_name'		=> get_text_for_language($rowset[$orig_topic_id]['forum_name'], $user->data['user_lang']))
 					);
 
 					$rowset[$orig_topic_id] = $row;
@@ -1019,7 +1019,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 				'TOPIC_ID'			=> $result_topic_id,
 				'POST_ID'			=> ($show_results == 'posts') ? $row['post_id'] : false,
 
-				'FORUM_TITLE'		=> $row['forum_name'],
+				'FORUM_TITLE'		=> get_text_for_language($row['forum_name'], $user->data['user_lang']),
 				'TOPIC_TITLE'		=> $topic_title,
 				'TOPIC_REPLIES'		=> $replies,
 				'TOPIC_VIEWS'		=> $row['topic_views'],
@@ -1117,15 +1117,16 @@ while ($row = $db->sql_fetchrow($result))
 		$holding = '';
 	}
 
+    $forum_name = get_text_for_language($row['forum_name'], $user->data['user_lang']);
 	if ($row['right_id'] - $row['left_id'] > 1)
 	{
 		$cat_right = max($cat_right, $row['right_id']);
 
-		$holding .= '<option value="' . $row['forum_id'] . '"' . $selected . '>' . $padding . $row['forum_name'] . '</option>';
+		$holding .= '<option value="' . $row['forum_id'] . '"' . $selected . '>' . $padding . $forum_name . '</option>';
 	}
 	else
 	{
-		$s_forums .= $holding . '<option value="' . $row['forum_id'] . '"' . $selected . '>' . $padding . $row['forum_name'] . '</option>';
+		$s_forums .= $holding . '<option value="' . $row['forum_id'] . '"' . $selected . '>' . $padding . $forum_name . '</option>';
 		$holding = '';
 	}
 }

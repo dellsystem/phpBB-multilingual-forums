@@ -209,6 +209,7 @@ while ($row = $db->sql_fetchrow($result))
 		case 'viewforum':
 		case 'viewtopic':
 			$forum_id = $row['session_forum_id'];
+            $forum_name = get_text_for_language($forum_data[$forum_id]['forum_name'], $user->data['user_lang']);
 
 			if ($forum_id && $auth->acl_get('f_list', $forum_id))
 			{
@@ -217,7 +218,7 @@ while ($row = $db->sql_fetchrow($result))
 
 				if ($forum_data[$forum_id]['forum_type'] == FORUM_LINK)
 				{
-					$location = sprintf($user->lang['READING_LINK'], $forum_data[$forum_id]['forum_name']);
+					$location = sprintf($user->lang['READING_LINK'], $forum_name);
 					break;
 				}
 
@@ -231,21 +232,21 @@ while ($row = $db->sql_fetchrow($result))
 						{
 							case 'reply':
 							case 'quote':
-								$location = sprintf($user->lang['REPLYING_MESSAGE'], $forum_data[$forum_id]['forum_name']);
+								$location = sprintf($user->lang['REPLYING_MESSAGE'], $forum_name);
 							break;
 
 							default:
-								$location = sprintf($user->lang['POSTING_MESSAGE'], $forum_data[$forum_id]['forum_name']);
+								$location = sprintf($user->lang['POSTING_MESSAGE'], $forum_name);
 							break;
 						}
 					break;
 
 					case 'viewtopic':
-						$location = sprintf($user->lang['READING_TOPIC'], $forum_data[$forum_id]['forum_name']);
+						$location = sprintf($user->lang['READING_TOPIC'], $forum_name);
 					break;
 
 					case 'viewforum':
-						$location = sprintf($user->lang['READING_FORUM'], $forum_data[$forum_id]['forum_name']);
+						$location = sprintf($user->lang['READING_FORUM'], $forum_name);
 					break;
 				}
 			}

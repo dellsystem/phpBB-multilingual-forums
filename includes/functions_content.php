@@ -179,7 +179,7 @@ function make_jumpbox($action, $forum_id = false, $select_all = false, $acl_list
 
 		$template->assign_block_vars('jumpbox_forums', array(
 			'FORUM_ID'		=> $row['forum_id'],
-			'FORUM_NAME'	=> $row['forum_name'],
+			'FORUM_NAME'	=> get_text_for_language($row['forum_name'], $user->data['user_lang']),
 			'SELECTED'		=> ($row['forum_id'] == $forum_id) ? ' selected="selected"' : '',
 			'S_FORUM_COUNT'	=> $iteration,
 			'S_IS_CAT'		=> ($row['forum_type'] == FORUM_CAT) ? true : false,

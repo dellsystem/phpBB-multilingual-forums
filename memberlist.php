@@ -142,7 +142,7 @@ switch ($mode)
 		$forums = array();
 		while ($row = $db->sql_fetchrow($result))
 		{
-			$forums[$row['forum_id']] = $row['forum_name'];
+			$forums[$row['forum_id']] = get_text_for_language($row['forum_name'], $user->data['user_lang']);
 		}
 		$db->sql_freeresult($result);
 

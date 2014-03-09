@@ -56,7 +56,7 @@ function mcp_front_view($id, $mode, $action)
 
 				while ($row = $db->sql_fetchrow($result))
 				{
-					$forum_names[$row['forum_id']] = $row['forum_name'];
+					$forum_names[$row['forum_id']] = get_text_for_language($row['forum_name'], $user->data['user_lang']);
 				}
 				$db->sql_freeresult($result);
 
@@ -224,7 +224,7 @@ function mcp_front_view($id, $mode, $action)
 						'AUTHOR_COLOUR'		=> get_username_string('colour', $row['author_id'], $row['author_name'], $row['author_colour']),
 						'U_AUTHOR'			=> get_username_string('profile', $row['author_id'], $row['author_name'], $row['author_colour']),
 
-						'FORUM_NAME'	=> (!$global_topic) ? $row['forum_name'] : $user->lang['GLOBAL_ANNOUNCEMENT'],
+						'FORUM_NAME'	=> (!$global_topic) ? get_text_for_language($row['forum_name'], $user->data['user_lang']) : $user->lang['GLOBAL_ANNOUNCEMENT'],
 						'TOPIC_TITLE'	=> $row['topic_title'],
 						'SUBJECT'		=> ($row['post_subject']) ? $row['post_subject'] : $user->lang['NO_SUBJECT'],
 						'REPORT_TIME'	=> $user->format_date($row['report_time']),

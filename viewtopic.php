@@ -621,7 +621,7 @@ if (!empty($_EXTRA_URL))
 // Send vars to template
 $template->assign_vars(array(
 	'FORUM_ID' 		=> $forum_id,
-	'FORUM_NAME' 	=> $topic_data['forum_name'],
+	'FORUM_NAME' 	=> get_text_for_language($topic_data['forum_name'], $user->data['user_lang']),
 	'FORUM_DESC'	=> generate_text_for_display($topic_data['forum_desc'], $topic_data['forum_desc_uid'], $topic_data['forum_desc_bitfield'], $topic_data['forum_desc_options']),
 	'TOPIC_ID' 		=> $topic_id,
 	'TOPIC_TITLE' 	=> $topic_data['topic_title'],

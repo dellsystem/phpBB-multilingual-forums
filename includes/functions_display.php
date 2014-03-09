@@ -238,7 +238,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		else if ($row['forum_type'] != FORUM_CAT)
 		{
 			$subforums[$parent_id][$forum_id]['display'] = ($row['display_on_index']) ? true : false;
-			$subforums[$parent_id][$forum_id]['name'] = $row['forum_name'];
+			$subforums[$parent_id][$forum_id]['name'] = get_text_for_display($row['forum_name'], $user->data['user_lang']);
 			$subforums[$parent_id][$forum_id]['orig_forum_last_post_time'] = $row['forum_last_post_time'];
 			$subforums[$parent_id][$forum_id]['children'] = array();
 
@@ -317,7 +317,8 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			$template->assign_block_vars('forumrow', array(
 				'S_IS_CAT'				=> true,
 				'FORUM_ID'				=> $row['forum_id'],
-				'FORUM_NAME'			=> $row['forum_name'],
+				'FORUM_NAME'			=>
+                get_text_for_language($row['forum_name'], $user->data['user_lang']),
 				'FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),
 				'FORUM_FOLDER_IMG'		=> '',
 				'FORUM_FOLDER_IMG_SRC'	=> '',
@@ -472,7 +473,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			'S_FEED_ENABLED'	=> ($config['feed_forum'] && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $row['forum_options']) && $row['forum_type'] == FORUM_POST) ? true : false,
 
 			'FORUM_ID'				=> $row['forum_id'],
-			'FORUM_NAME'			=> $row['forum_name'],
+			'FORUM_NAME'			=> get_text_for_language($row['forum_name'], $user->data['user_lang']),
 			'FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),
 			'TOPICS'				=> $row['forum_topics'],
 			$l_post_click_count		=> $post_click_count,
@@ -585,7 +586,7 @@ function generate_forum_nav(&$forum_data)
 				'S_IS_CAT'		=> ($parent_type == FORUM_CAT) ? true : false,
 				'S_IS_LINK'		=> ($parent_type == FORUM_LINK) ? true : false,
 				'S_IS_POST'		=> ($parent_type == FORUM_POST) ? true : false,
-				'FORUM_NAME'	=> $parent_name,
+				'FORUM_NAME'	=> get_text_for_language($parent_name, $user->data['user_lang']),
 				'FORUM_ID'		=> $parent_forum_id,
 				'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $parent_forum_id))
 			);
@@ -596,14 +597,14 @@ function generate_forum_nav(&$forum_data)
 		'S_IS_CAT'		=> ($forum_data['forum_type'] == FORUM_CAT) ? true : false,
 		'S_IS_LINK'		=> ($forum_data['forum_type'] == FORUM_LINK) ? true : false,
 		'S_IS_POST'		=> ($forum_data['forum_type'] == FORUM_POST) ? true : false,
-		'FORUM_NAME'	=> $forum_data['forum_name'],
+		'FORUM_NAME'	=> get_text_for_language($forum_data['forum_name'], $user->data['user_lang']),
 		'FORUM_ID'		=> $forum_data['forum_id'],
 		'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_data['forum_id']))
 	);
 
 	$template->assign_vars(array(
 		'FORUM_ID' 		=> $forum_data['forum_id'],
-		'FORUM_NAME'	=> $forum_data['forum_name'],
+		'FORUM_NAME'	=> get_text_for_language($forum_data['forum_name'], $user->data['user_lang']),
 		'FORUM_DESC'	=> generate_text_for_display($forum_data['forum_desc'], $forum_data['forum_desc_uid'], $forum_data['forum_desc_bitfield'], $forum_data['forum_desc_options']),
 
 		'S_ENABLE_FEEDS_FORUM'	=> ($config['feed_forum'] && $forum_data['forum_type'] == FORUM_POST && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $forum_data['forum_options'])) ? true : false,
@@ -1042,7 +1043,7 @@ function display_user_activity(&$userdata)
 	$active_f_name = $active_f_id = $active_f_count = $active_f_pct = '';
 	if (!empty($active_f_row['num_posts']))
 	{
-		$active_f_name = $active_f_row['forum_name'];
+		$active_f_name = get_text_for_language($active_f_row['forum_name'], $user->data['user_lang']);
 		$active_f_id = $active_f_row['forum_id'];
 		$active_f_count = $active_f_row['num_posts'];
 		$active_f_pct = ($userdata['user_posts']) ? ($active_f_count / $userdata['user_posts']) * 100 : 0;
