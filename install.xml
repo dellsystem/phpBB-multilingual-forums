@@ -241,7 +241,7 @@ function get_text_for_language($input, $lang)
 				<find><![CDATA['FORUM_NAME'	=> $parent_name,]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[$parent_name]]></inline-find>
-					<inline-action type="before-add"><![CDATA[get_text_for_language($parent_name, $user->data['user_lang'])]]></inline-action>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language($parent_name, $user->data['user_lang'])]]></inline-action>
 				</inline-edit>
 			</edit>
 			<edit>
