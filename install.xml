@@ -167,9 +167,14 @@
 		</open>
 		<open src="includes/functions.php">
 			<edit>
-				<find><![CDATA[
-?>]]></find>
-				<action type="before-add"><![CDATA[/**
+				<find><![CDATA[			return $phpbb_hook->hook_return_result(__FUNCTION__);
+		}
+	}
+
+	return;
+}
+]]></find>
+				<action type="after-add"><![CDATA[/**
 * Multilingual Forums MOD
 */
 function get_text_for_language($input, $lang)
