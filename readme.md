@@ -23,6 +23,6 @@ gmail).
 [phpBB3]: http://www.phpbb.com
 [image]: http://dellsystem.me/img/mod-information.png
 [page]: http://dellsystem.me/phpbb-multilingual-forums
-[demo]: http://phpbb.dellsystem.me/dynamo
-[topic]: http://www.phpbb.com/community/viewtopic.php?f=70&t=1823845
+[demo]: http://phpbb.dellsystem.me/multiling
+[topic]: https://www.phpbb.com/community/viewtopic.php?f=70&t=2231436
 [pm]: http://www.phpbb.com/community/ucp.php?i=pm&mode=compose&u=178433
