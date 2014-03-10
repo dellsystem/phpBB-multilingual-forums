@@ -18,13 +18,20 @@
 				<email><![CDATA[dellsystem@phpbb.com]]></email>
 			</author>
 		</author-group>
-		<mod-version>0.0.1</mod-version>
+		<mod-version>0.0.2</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>600</time>
 			<target-version>3.0.12</target-version>
 		</installation>
 		<history>
+			<entry>
+				<date>2014-03-09</date>
+				<rev-version>0.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Fixed bug in includes/functions_display.php]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2014-03-09</date>
 				<rev-version>0.0.1</rev-version>
