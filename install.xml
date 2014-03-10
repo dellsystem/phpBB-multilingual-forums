@@ -18,13 +18,20 @@
 				<email><![CDATA[dellsystem@phpbb.com]]></email>
 			</author>
 		</author-group>
-		<mod-version>0.0.2</mod-version>
+		<mod-version>0.0.3</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>600</time>
 			<target-version>3.0.12</target-version>
 		</installation>
 		<history>
+			<entry>
+				<date>2014-03-10</date>
+				<rev-version>0.0.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Fixed ACP log update entry language key]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2014-03-09</date>
 				<rev-version>0.0.2</rev-version>

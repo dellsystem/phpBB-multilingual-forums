@@ -60,6 +60,8 @@ $language_file = 'mods/info_acp_multiling';
 * function - http://php.net/manual/en/function.version-compare.php
 */
 $versions = array(
+	'0.0.3' => array(
+	),
 	'0.0.2' => array(
 	),
 	'0.0.1' => array(
