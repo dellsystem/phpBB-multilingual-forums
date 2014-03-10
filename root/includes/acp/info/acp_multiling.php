@@ -13,7 +13,7 @@
 */
 if (!defined('IN_PHPBB'))
 {
-    exit;
+	exit;
 }
 
 /**
@@ -21,25 +21,25 @@ if (!defined('IN_PHPBB'))
 */
 class acp_multiling_info
 {
-    function module()
-    {
-        return array(
-            'filename'    => 'acp_multiling',
-            'title'        => 'ACP_MULTILING_MOD',
-            'version'    => '0.0.1',
-            'modes'        => array(
-                'index'     => array('title' => 'ACP_GENERAL_CONFIGURATION',
+	function module()
+	{
+		return array(
+			'filename'	=> 'acp_multiling',
+			'title'		=> 'ACP_MULTILING_MOD',
+			'version'	=> '0.0.1',
+			'modes'		=> array(
+				'index'	 => array('title' => 'ACP_GENERAL_CONFIGURATION',
 'auth' => 'acl_a_board', 'cat' => array('')),
-            ),
-        );
-    }
+			),
+		);
+	}
  
-    function install()
-    {
-    }
+	function install()
+	{
+	}
  
-    function uninstall()
-    {
-    }
+	function uninstall()
+	{
+	}
 }
 ?>

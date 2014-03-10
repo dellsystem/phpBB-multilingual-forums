@@ -13,18 +13,18 @@
 */
 if (!defined('IN_PHPBB'))
 {
-    exit;
+	exit;
 }
 
 // Create the lang array if it does not already exist
 if (empty($lang) || !is_array($lang))
 {
-    $lang = array();
+	$lang = array();
 }
 
 // Merge the following language entries into the lang array
 $lang = array_merge($lang, array(
-    'ACP_MULTILING_MOD' => 'Multilingual Forums MOD',
-    'LOG_MULTILING_UPDATE' => '<strong>Altered multilingual forums MOD settings</strong>',
+	'ACP_MULTILING_MOD' => 'Multilingual Forums MOD',
+	'LOG_MULTILING_UPDATE' => '<strong>Altered multilingual forums MOD settings</strong>',
 ));
 ?>

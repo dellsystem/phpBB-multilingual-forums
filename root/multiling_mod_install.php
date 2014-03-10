@@ -23,7 +23,7 @@ $user->setup();
 
 if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
-    trigger_error('Please download the latest UMIL (Unified MOD Install
+	trigger_error('Please download the latest UMIL (Unified MOD Install
 Library)
 from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>',
 E_USER_ERROR);
@@ -60,26 +60,26 @@ $language_file = 'mods/info_acp_multiling';
 * function - http://php.net/manual/en/function.version-compare.php
 */
 $versions = array(
-    '0.0.2' => array(
-    ),
-    '0.0.1' => array(
+	'0.0.2' => array(
+	),
+	'0.0.1' => array(
 
-        'config_add' => array(
-            array('multiling_languages', 'en-gb#fr', 0),
-            array('multiling_delimiter', '#', 0),
-        ),
+		'config_add' => array(
+			array('multiling_languages', 'en-gb#fr', 0),
+			array('multiling_delimiter', '#', 0),
+		),
 
-        'module_add' => array(
-            array('acp', 'ACP_CAT_DOT_MODS', 'ACP_MULTILING_MOD'),
+		'module_add' => array(
+			array('acp', 'ACP_CAT_DOT_MODS', 'ACP_MULTILING_MOD'),
 
-            array('acp', 'ACP_MULTILING_MOD', array(
-                    'module_basename'       => 'multiling',
-                    'modes'             => array('index'),
-                ),
-            ),
-        ),
+			array('acp', 'ACP_MULTILING_MOD', array(
+					'module_basename'	   => 'multiling',
+					'modes'			 => array('index'),
+				),
+			),
+		),
 
-    ),
+	),
 );
 
 // Include the UMIL Auto file, it handles the rest
