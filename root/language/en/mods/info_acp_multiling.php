@@ -25,5 +25,6 @@ if (empty($lang) || !is_array($lang))
 // Merge the following language entries into the lang array
 $lang = array_merge($lang, array(
     'ACP_MULTILING_MOD' => 'Multilingual Forums MOD',
+    'LOG_MULTILING_UPDATE' => '<strong>Altered multilingual forums MOD settings</strong>',
 ));
 ?>

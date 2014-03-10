@@ -53,7 +53,7 @@ utf8_normalize_nfc(request_var('multiling_languages', '', true));
                 // show the error box
                 if (!sizeof($error))
                 {
-                    add_log('admin', 'LOG_MULTILANG_UPDATE');
+                    add_log('admin', 'LOG_MULTILING_UPDATE');
                     trigger_error($user->lang['CONFIG_UPDATED'] .
 adm_back_link($this->u_action));
                 }
