@@ -238,7 +238,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		else if ($row['forum_type'] != FORUM_CAT)
 		{
 			$subforums[$parent_id][$forum_id]['display'] = ($row['display_on_index']) ? true : false;
-			$subforums[$parent_id][$forum_id]['name'] = get_text_for_display($row['forum_name'], $user->data['user_lang']);
+			$subforums[$parent_id][$forum_id]['name'] = get_text_for_language($row['forum_name'], $user->data['user_lang']);
 			$subforums[$parent_id][$forum_id]['orig_forum_last_post_time'] = $row['forum_last_post_time'];
 			$subforums[$parent_id][$forum_id]['children'] = array();
 
