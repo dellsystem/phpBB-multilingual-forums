@@ -7,8 +7,8 @@
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
 		<title lang="en"><![CDATA[Multilingual Forums MOD]]></title>
-		<description lang="en"><![CDATA[Enables multi-language support for forum names.]]></description>
-		<author-notes lang="en"><![CDATA[Kind of hacky. Sorry. If you really need this MOD, though, you probably don't care.]]></author-notes>
+		<description lang="en"><![CDATA[Enables multi-language support for forum names and descriptions.]]></description>
+		<author-notes lang="en"><![CDATA[Make sure to read the DIY instructions at the end.]]></author-notes>
 		<github><![CDATA[https://github.com/dellsystem/phpBB-multilingual-forums]]></github>
 		<author-group>
 			<author>
@@ -72,6 +72,13 @@
 				<inline-edit>
 					<inline-find><![CDATA[$post_data['forum_name']]]></inline-find>
 					<inline-action type="replace-with"><![CDATA[get_text_for_language($post_data['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_DESC'			=> ($post_data['forum_desc']) ? generate_text_for_display($post_data['forum_desc'], $post_data['forum_desc_uid'], $post_data['forum_desc_bitfield'], $post_data['forum_desc_options']) : '',]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($post_data['forum_desc'], $post_data['forum_desc_uid'], $post_data['forum_desc_bitfield'], $post_data['forum_desc_options'])]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($post_data['forum_desc'], $post_data['forum_desc_uid'], $post_data['forum_desc_bitfield'], $post_data['forum_desc_options']), $user->data['user_lang'])]]></inline-action>
 				</inline-edit>
 			</edit>
 		</open>
@@ -178,6 +185,13 @@
 					<inline-action type="replace-with"><![CDATA[get_text_for_language($topic_data['forum_name'], $user->data['user_lang'])]]></inline-action>
 				</inline-edit>
 			</edit>
+			<edit>
+				<find><![CDATA['FORUM_DESC'	=> generate_text_for_display($topic_data['forum_desc'], $topic_data['forum_desc_uid'], $topic_data['forum_desc_bitfield'], $topic_data['forum_desc_options']),]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($topic_data['forum_desc'], $topic_data['forum_desc_uid'], $topic_data['forum_desc_bitfield'], $topic_data['forum_desc_options'])]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($topic_data['forum_desc'], $topic_data['forum_desc_uid'], $topic_data['forum_desc_bitfield'], $topic_data['forum_desc_options']), $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
 		</open>
 		<open src="includes/functions.php">
 			<edit>
@@ -248,10 +262,24 @@ function get_text_for_language($input, $lang)
 				</inline-edit>
 			</edit>
 			<edit>
+				<find><![CDATA['FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options'])]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']), $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
 				<find><![CDATA['FORUM_NAME'			=> $row['forum_name'],]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[$row['forum_name']]]></inline-find>
 					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']), $user->data['user_lang']),]]></inline-action>
 				</inline-edit>
 			</edit>
 			<edit>
@@ -276,6 +304,13 @@ function get_text_for_language($input, $lang)
 				</inline-edit>
 			</edit>
 			<edit>
+				<find><![CDATA['FORUM_DESC'	=> generate_text_for_display($forum_data['forum_desc'], $forum_data['forum_desc_uid'], $forum_data['forum_desc_bitfield'], $forum_data['forum_desc_options']),]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($forum_data['forum_desc'], $forum_data['forum_desc_uid'], $forum_data['forum_desc_bitfield'], $forum_data['forum_desc_options'])]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($forum_data['forum_desc'], $forum_data['forum_desc_uid'], $forum_data['forum_desc_bitfield'], $forum_data['forum_desc_options']), $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
 				<find><![CDATA[$active_f_name = $active_f_row['forum_name'];]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[$active_f_row['forum_name']]]></inline-find>
@@ -295,6 +330,13 @@ function get_text_for_language($input, $lang)
 				<inline-edit>
 					<inline-find><![CDATA[$forum_info['forum_name']]]></inline-find>
 					<inline-action type="replace-with"><![CDATA[get_text_for_language($forum_info['forum_name'], $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['FORUM_DESCRIPTION'		=> generate_text_for_display($forum_info['forum_desc'], $forum_info['forum_desc_uid'], $forum_info['forum_desc_bitfield'], $forum_info['forum_desc_options']),]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($forum_info['forum_desc'], $forum_info['forum_desc_uid'], $forum_info['forum_desc_bitfield'], $forum_info['forum_desc_options'])]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($forum_info['forum_desc'], $forum_info['forum_desc_uid'], $forum_info['forum_desc_bitfield'], $forum_info['forum_desc_options']), $user->data['user_lang'])]]></inline-action>
 				</inline-edit>
 			</edit>
 		</open>
@@ -354,10 +396,17 @@ function get_text_for_language($input, $lang)
 					<inline-action type="replace-with"><![CDATA[get_text_for_language($row['forum_name'], $user->data['user_lang'])]]></inline-action>
 				</inline-edit>
 			</edit>
+			<edit>
+				<find><![CDATA['FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options'])]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[get_text_for_language(generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']), $user->data['user_lang'])]]></inline-action>
+				</inline-edit>
+			</edit>
 		</open>
 		<php-installer><![CDATA[multiling_mod_install.php]]></php-installer>
-		<diy-instructions lang="en"><![CDATA[You can configure this MOD in the ACP, under the .MODs tab. You will then have to edit your forum names to take advantage of the multilingual support provided by this mod.
+		<diy-instructions lang="en"><![CDATA[You can configure this MOD in the ACP, under the .MODs tab. You will then have to edit your forum names and descriptions to take advantage of the multilingual support provided by this mod.
 
-As an example, if your board has two languages, English (UK) and French, installed, and you don't plan on using the character | in any of your forum names, you could set the delimiter (configurable in the ACP, under the .MODS tab) to be |, and set the languages to be en-gb|fr. Then, change all your forum names to use the format Hello|Bonjour.]]></diy-instructions>
+As an example, if your board has two languages, English (UK) and French, installed, and you don't plan on using the character | in any of your forum names or descriptions, you could set the delimiter (configurable in the ACP, under the .MODS tab) to be |, and set the languages to be en-gb|fr. Then, change all your forum names to use the format Hello|Bonjour, and the descriptions to The description|La description.]]></diy-instructions>
 	</action-group>
 </mod>
