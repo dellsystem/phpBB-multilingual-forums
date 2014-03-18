@@ -622,7 +622,7 @@ if (!empty($_EXTRA_URL))
 $template->assign_vars(array(
 	'FORUM_ID' 		=> $forum_id,
 	'FORUM_NAME' 	=> get_text_for_language($topic_data['forum_name'], $user->data['user_lang']),
-	'FORUM_DESC'	=> generate_text_for_display($topic_data['forum_desc'], $topic_data['forum_desc_uid'], $topic_data['forum_desc_bitfield'], $topic_data['forum_desc_options']),
+	'FORUM_DESC'	=> get_text_for_language(generate_text_for_display($topic_data['forum_desc'], $topic_data['forum_desc_uid'], $topic_data['forum_desc_bitfield'], $topic_data['forum_desc_options']), $user->data['user_lang']),
 	'TOPIC_ID' 		=> $topic_id,
 	'TOPIC_TITLE' 	=> $topic_data['topic_title'],
 	'TOPIC_POSTER'	=> $topic_data['topic_poster'],
